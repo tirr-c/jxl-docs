@@ -1,0 +1,6 @@
+[book]
+title = "JPEG XL: From Bits to Pixels"
+authors = ["Wonwoo Choi"]
+language = "en"
+multilingual = false
+src = "src"
