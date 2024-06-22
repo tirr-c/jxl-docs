@@ -5,7 +5,7 @@
 - [Reading a Bitstream](./bitstream/README.md)
   - [Bitstream Operations](./bitstream/operations.md)
   - [Structs and Enums](./bitstream/struct-enum.md)
-  - [Reading Extensions]()
+  - [Reading Extensions](./bitstream/extensions.md)
 - [Container Format]()
   - [JPEG XL Codestream Boxes]()
 
