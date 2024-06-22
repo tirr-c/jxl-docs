@@ -4,3 +4,7 @@ authors = ["Wonwoo Choi"]
 language = "en"
 multilingual = false
 src = "src"
+
+[output.html]
+git-repository-url = "https://github.com/tirr-c/jxl-docs"
+site-url = "/jxl-docs/"
