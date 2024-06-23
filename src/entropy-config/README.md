@@ -2,7 +2,7 @@
 
 This chapter describes how to read struct `EntropyDecoder` from a bitstream.
 
-When pseudocode says `EntropyDecoder::parse(num_dist)`, it reads *entropy decoder configuration*, in
+`read!(struct EntropyDecoder(num_dist, lz77_enabled))` reads *entropy decoder configuration*, in the
 following order:
 
 1. (Optional) LZ77 stream configuration.
@@ -12,3 +12,8 @@ following order:
 1. Post-clustered symbol probability distributions.
 
 Subchapters will explain each topic in detail.
+
+Also, `EntropyDecoder` has two helper methods:
+
+- `EntropyDecoder::parse(num_dist)` means `read!(struct EntropyDecoder(num_dist, true))`.
+- `EntropyDecoder::parse_no_lz77(num_dist)` means `read!(struct EntropyDecoder(num_dist, false))`.
