@@ -11,13 +11,14 @@
 
 # Entropy Decoding
 
-- [Reading Entropy Decoder Configuration]()
-  - [LZ77 Stream]()
+- [Reading Entropy Decoder Configuration](./entropy-config/README.md)
+  - [LZ77 Stream](./entropy-config/lz77.md)
+  - [Distribution Clustering](./entropy-config/clustering.md)
+  - [Hybrid Integer](./entropy-config/hybrid-integer.md)
+  - [Entropy Coding Types](./entropy-config/coding-types.md)
   - [Symbol Probability Distributions]()
     - [Prefix Code]()
     - [Asymmetric Numeral System]()
-  - [Distribution Clustering]()
-  - [Hybrid Integer]()
 - [Decoding Entropy-coded Stream]()
   - [Entropy-coded Symbol]()
   - [Hybrid Integer]()
