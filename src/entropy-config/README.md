@@ -2,7 +2,7 @@
 
 This chapter describes how to read struct `EntropyDecoder` from a bitstream.
 
-`read!(struct EntropyDecoder(num_dist, lz77_enabled))` reads *entropy decoder configuration*, in the
+`read!(struct EntropyDecoder(num_dist, lz77_allowed))` reads *entropy decoder configuration*, in the
 following order:
 
 1. (Optional) LZ77 stream configuration.
@@ -13,7 +13,11 @@ following order:
 
 Subchapters will explain each topic in detail.
 
-Also, `EntropyDecoder` has two helper methods:
+Also, `EntropyDecoder` has a helper method `parse`:
 
-- `EntropyDecoder::parse(num_dist)` means `read!(struct EntropyDecoder(num_dist, true))`.
-- `EntropyDecoder::parse_no_lz77(num_dist)` means `read!(struct EntropyDecoder(num_dist, false))`.
+```
+/// Read an entropy decoder configuration with LZ77 allowed.
+pub fn EntropyDecoder::parse(num_dist: u32) -> EntropyDecoder {
+    read!(struct EntropyDecoder(num_dist, true))
+}
+```
