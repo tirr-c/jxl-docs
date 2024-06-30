@@ -9,7 +9,18 @@ Fortunately, distributions tend to form a cluster with similar symbol probabilit
 signalling every single distribution, JPEG XL first reduces the number of distributions using
 *distribution clustering*.
 
-We define a function `read_clustering`:
+```
+// struct EntropyDecoder(num_dist: u32, lz77_allowed: bool) {
+// ...
+
+pub let cluster_map = read_clustering(num_dist);
+
+// ...
+```
+
+## Reading cluster map
+
+We define a function `read_clustering` which reads a cluster map:
 
 ```
 pub fn read_clustering(num_dist: u32) -> Vec<u32> {
@@ -24,7 +35,7 @@ pub fn read_clustering(num_dist: u32) -> Vec<u32> {
     } else {
         read_complex(num_dist)
     };
-    verify_cluster(&cluster);
+    validate_cluster(&cluster);
     cluster
 }
 ```
@@ -62,9 +73,10 @@ fn read_complex(num_dist: u32) -> Vec<u32> {
     for _ in 0..num_dist {
         cluster.push(decoder.read_uint(0));
     }
-    decoder.verify();
+    decoder.validate();
 
     if use_move_to_front {
+        // Move-to-front encoding
         inverse_move_to_front(&mut cluster);
     }
     cluster
@@ -74,3 +86,41 @@ fn read_complex(num_dist: u32) -> Vec<u32> {
 Note that we're reading another entropy-coded stream recursively. `lz77_allowed` is there to prevent
 additional recursion; if we allowed LZ77 there, the number of distribution would increase to 2,
 which might trigger another recursive entropy-coded stream.
+
+### Move-to-front encoding
+
+Complex cluster encoding may optionally use *move-to-front encoding*. It keeps the most recently
+used indices in lower value.
+
+```
+fn inverse_move_to_front(encoded_map: &mut [u32]) {
+    let mut mru: Vec<u32> = (0..256).collect();
+    for slot in encoded_map {
+        let idx = *slot as usize;
+        assert!(idx < 256);
+
+        let cluster_idx = mru[idx];
+        *slot = cluster_idx;
+
+        if idx > 0 {
+            // Move last used index to front
+            mru.copy_within(0..idx, 1);
+            mru[0] = cluster_idx;
+        }
+    }
+}
+```
+
+This helps encoding cluster maps with runs of same index.
+
+### Cluster map validation
+
+Finally, we validate that there's no hole in the cluster map:
+
+```
+fn validate_cluster(cluster_map: &[u32]) {
+    let num_clusters = *cluster_map.iter().max().unwrap() + 1;
+    let cluster_indices: HashSet<_> = cluster_map.iter().copied().collect();
+    assert_eq!(num_clusters, cluster_indices.len() as u32);
+}
+```
