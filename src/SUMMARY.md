@@ -8,14 +8,22 @@
   - [Reading Extensions](./bitstream/extensions.md)
 - [Container Format]()
   - [JPEG XL Codestream Boxes]()
+- [Codestream Overview]()
+
+# Image Header
+
+- [Image Header](./image-header/README.md)
+  - [struct `ImageHeaders`](./image-header/ImageHeaders.md)
+  - [struct `ImageSize`](./image-header/ImageSize.md)
+  - [struct `ImageMetadata`]()
 
 # Entropy Decoding
 
 - [Reading Entropy Decoder Configuration](./entropy-config/README.md)
   - [LZ77 Stream](./entropy-config/lz77.md)
   - [Distribution Clustering](./entropy-config/clustering.md)
-  - [Hybrid Integer](./entropy-config/hybrid-integer.md)
   - [Entropy Coding Types](./entropy-config/coding-types.md)
+  - [Hybrid Integer](./entropy-config/hybrid-integer.md)
   - [Symbol Probability Distributions]()
     - [Prefix Code]()
     - [Asymmetric Numeral System]()
@@ -24,12 +32,8 @@
   - [Hybrid Integer]()
   - [LZ77-enabled Stream]()
 
-# Image Header
+# Color Encoding
 
-- [Image Header]()
-  - [struct `ImageHeaders`]()
-  - [struct `ImageSize`]()
-  - [struct `ImageMetadata`]()
 - [Color Encoding]()
   - [struct `ColorEncoding`]()
   - [struct `ToneMapping`]()
