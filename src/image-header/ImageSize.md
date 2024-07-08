@@ -44,4 +44,4 @@ For example, encoding `3840x2160` takes 19 bits:
   2 + 13 = 15 bits.
 - Aspect ratio is 16:9, which is well-known. Takes 3 bits.
 
-Note that width or height cannot be zero.
+Note that width or height cannot be zero, and width is rounded down if the aspect ratio calculation results in a fractional value.
