@@ -26,7 +26,7 @@
   - [Hybrid Integer](./entropy-config/hybrid-integer.md)
   - [Symbol Probability Distributions]()
     - [Prefix Code]()
-    - [Asymmetric Numeral System]()
+    - [Asymmetric Numeral Systems]()
 - [Decoding Entropy-coded Stream]()
   - [Entropy-coded Symbol]()
   - [Hybrid Integer]()
