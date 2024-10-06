@@ -5,6 +5,20 @@ It can be useful when there are some bits that can't be encoded efficiently usin
 e.g. the signal is noisy and have almost equal probability in a range of value.
 
 ```
+// struct EntropyDecoder(num_dist: u32, lz77_allowed: bool) {
+// ...
+
+pub let mut uint_configs = vec![];
+for _ in 0..num_clusters {
+    uint_configs.push(read!(struct HybridIntegerConfig(log_alphabet_size)));
+}
+
+// ...
+```
+
+## Hybrid integer config
+
+```
 struct HybridIntegerConfig(log_alphabet_size: u32) {
     let exp_bits = add_one_log2_ceil(log_alphabet_size);
     pub let split_exponent = read!(u(exp_bits));

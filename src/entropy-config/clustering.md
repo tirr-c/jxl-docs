@@ -13,7 +13,7 @@ signalling every single distribution, JPEG XL first reduces the number of distri
 // struct EntropyDecoder(num_dist: u32, lz77_allowed: bool) {
 // ...
 
-pub let cluster_map = read_clustering(num_dist);
+pub let (cluster_map, num_clusters) = read_clustering(num_dist);
 
 // ...
 ```
@@ -23,7 +23,7 @@ pub let cluster_map = read_clustering(num_dist);
 We define a function `read_clustering` which reads a cluster map:
 
 ```
-pub fn read_clustering(num_dist: u32) -> Vec<u32> {
+pub fn read_clustering(num_dist: u32) -> (Vec<u32>, u32) {
     if num_dist == 1 {
         // Trivial case; no need to cluster
         return vec![0];
@@ -35,8 +35,8 @@ pub fn read_clustering(num_dist: u32) -> Vec<u32> {
     } else {
         read_complex(num_dist)
     };
-    validate_cluster(&cluster);
-    cluster
+    let num_clusters = validate_cluster(&cluster);
+    (cluster, num_clusters)
 }
 ```
 
@@ -118,9 +118,10 @@ This helps encoding cluster maps with runs of same index.
 Finally, we validate that there's no hole in the cluster map:
 
 ```
-fn validate_cluster(cluster_map: &[u32]) {
+fn validate_cluster(cluster_map: &[u32]) -> u32 {
     let num_clusters = *cluster_map.iter().max().unwrap() + 1;
     let cluster_indices: HashSet<_> = cluster_map.iter().copied().collect();
     assert_eq!(num_clusters, cluster_indices.len() as u32);
+    num_clusters
 }
 ```
