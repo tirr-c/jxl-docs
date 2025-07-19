@@ -23,6 +23,7 @@ assigning shorter code to more frequent symbols. Each code can be as long as 15 
 are parsed in the exact same way as [Brotli] does; see [Prefix Code] chapter for details.
 
 [Brotli]: https://www.rfc-editor.org/info/rfc7932
+[Prefix Code]: ./dist/prefix.md
 
 ## Asymmetric Numeral Systems
 
@@ -36,3 +37,5 @@ would grow about 4096 times larger if symbol 1 is appended.
 
 JPEG XL uses streaming rANS variant with alias mapping; see [Asymmetric Numeral Systems] chapter for
 details.
+
+[Asymmetric Numeral Systems]: ./dist/ans.md
